@@ -1,14 +1,48 @@
 from bank import Account
 
-conta = Account("0001", "12345-6", "Emilly", "1234")
+#Testando
+conta = Account("Emilly Reis", "0001", "12345-6", "1234", balance = 1000.0)
 
-print("Simulador Bancário")
-senha = input("Digite sua senha: ")
+while True:
+    print("APP Bank")
+    senha = input("Digite sua senha: ")
+    if conta.check_password(senha):
+        while True:
+            print(f"Bem Vindo(a) {conta.name}")
+            print("1 - Depositar")
+            print("2 - Sacar")
+            print("3 - Ver extrato")
+            print("4 - Sair")
 
-if conta.check_password(senha):
-    print(f"\nBem-vinda, {conta.owner}!")
-    conta.deposit(1000, "Depósito inicial")
-    print(f"Agência: {conta.agency} | Conta: {conta.number}")
-    print(f"Saldo atual: R$ {conta.balance:.2f}")
-else:
-    print("Senha incorreta.")
+            opcao = input("Escolha uma opção: ")
+
+            if opcao == "1":
+                valor = float(input("Digite o valor do depósito: "))
+                if conta.deposit(valor):
+                    print("Depósito realizado com sucesso!")
+                else:
+                    print("Valor inválido.")
+            
+            elif opcao == "2":
+                valor = float(input("Digite o valor do saque: "))
+                if conta.withdraw(valor):
+                    print("Saque realizado com sucesso!")
+                else:
+                    print("Saque não permitido (saldo insuficiente).")
+            
+            elif opcao == "3":
+                print("Extrato:")
+                for t in conta.extrato():
+                    print("-", t)
+                print(f"Saldo atual: R$ {conta.balance:.2f}")
+            
+            elif opcao == "4":
+                print("Saindo...")
+                break
+
+            else:
+                print("Opção inválida.")
+    else:
+        print("Senha inválida")
+
+
