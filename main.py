@@ -60,8 +60,9 @@ while True:
             elif opcao == "5":
                 valor = float(input("Digite o valor do Pix: "))
                 keyp = input("Digite a chave Pix: ")
-                if conta1.send_pix(valor, keyp, conta1, conta2):
-                    print(f"Pix de R${valor:.2f} enviado com sucesso!")
+                destination = conta1.send_pix(valor, keyp, conta1, conta2)
+                if destination:
+                    print(f"Pix de R${valor:.2f} enviado com sucesso para {destination.name}!")
                 else:
                     print("Erro ao enviar Pix (verifique saldo ou chave do destino).")
 

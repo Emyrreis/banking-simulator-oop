@@ -68,10 +68,10 @@ class Account:
     
     def send_pix(self, value: float, destination_key: str, conta1, conta2):
         if value <= 0:
-            return False
+            return None
 
         if (self.balance - value) < self.limit:
-            return False
+            return None
 
         destination_account = None
         for c in (conta1, conta2):
@@ -80,16 +80,17 @@ class Account:
                 break
 
         if not destination_account:
-            return False
+            return None
 
         self._Account__balance -= value
         destination_account._Account__balance += value
 
-        # Registra no extrato junto com as movimentações do saque e depósito
+        #Registra no extrato junto com as movimentações do saque e depósito
         self._Account__transactions.append(f"{datetime.now()} | Pix enviado: -R${value:.2f} para {destination_account.name}")
         destination_account._Account__transactions.append(f"{datetime.now()} | Pix recebido: +R${value:.2f} de {self.name}")
 
-        return True
+        return destination_account  
+
 
     #Método do limite
     def change_limit(self, new_limit: float):
