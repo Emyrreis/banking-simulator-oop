@@ -4,7 +4,7 @@ from bank import Account
 conta1 = Account("Emilly Reis", "0001", "12345-6", "1234", balance = 1000.0)
 conta2 = Account("Bella Santos", "0002", "67891-1", "4321", balance = 500.0)
 
-conta2.create_pix_key(123456789)
+#conta2.create_pix_key(123456789)
 
 while True:
     print("\nAPP Bank")
